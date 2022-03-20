@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:1.13
+    ports:
+      - "1234:80"
+    volumes:
+      - ./server:/usr/share/nginx/html
+  client:
+    build: client/
+    network_mode: host
+    command: python ./client.py
+    depends_on:
+      - nginx
